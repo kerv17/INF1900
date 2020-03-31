@@ -33,10 +33,10 @@ PROJECTNAME=Test
 PRJSRC= main.cpp
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
-INC=-I ../Lib
+INC=-I ../../Lib
 
 # Libraires a lier (ex: -lmylib)
-LIBS= -L ../Lib/ -lstatique
+LIBS= -L ../../Lib/ -lstatique
 
 # Niveau d'optimization
 # Utilisez s (size opt), 1, 2, 3 ou 0 (off)

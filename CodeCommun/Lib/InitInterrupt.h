@@ -3,9 +3,6 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#ifndef INITINTERRUPT_H
-#define INITINTERRUPT_H
-
 class InitInterrupt
 {
 private:
@@ -16,5 +13,5 @@ public:
     void initialization();
 };
 
-#endif
+
 

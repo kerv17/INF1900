@@ -2,8 +2,8 @@
   #define F_CPU 8000000UL
   #include <util/delay.h>
   #include <avr/interrupt.h>
-  #include "../tp7/Lib/Debug.h"
-  #include "../tp7/Lib/uart.h"
+  #include "../../Lib/Debug.h"
+  #include "../../Lib/uart.h"
 
 enum etat{
   initial,

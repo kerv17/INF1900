@@ -4,9 +4,6 @@
 #include <avr/interrupt.h>
 #include <util/delay_basic.h>
 
-
-#ifndef TIMER_H
-#define TIMER_H
 class startTimer
 {
 private:
@@ -17,4 +14,4 @@ public:
     void Timer(const uint16_t duration);
 };
 
-#endif
+

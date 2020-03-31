@@ -5,8 +5,7 @@
 #include <inttypes.h>
 #include <util/delay_basic.h>
 
-#ifndef PWM_H
-#define PWM_H
+
 
 class adjustmentPWM
 {
@@ -18,6 +17,6 @@ public:
 	void PWM (uint8_t duration);
 };
 
-#endif
+
 
 
