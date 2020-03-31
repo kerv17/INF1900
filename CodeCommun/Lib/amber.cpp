@@ -25,7 +25,7 @@ void amber::off()
 
 void amber::Amber(unsigned long s_count)
 {
-  for( long i =0; i < s_count; i++)
+  for( unsigned long i =0; i < s_count; i++)
   {
   green();
   _delay_ms(9);
