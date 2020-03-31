@@ -1,4 +1,3 @@
-#Makefile modifié par équipe 51-80
 ########       AVR Project Makefile       ########
 #####                                        #####
 #####      Makefile produit et ecrit par     #####
@@ -24,7 +23,7 @@ MCU=atmega324pa
 
 # Nom de votre projet
 # (utilisez un seul mot, exemple: 'monprojet')
-PROJECTNAME=Test
+PROJECTNAME=tp7
 
 # Fichiers sources
 # Utilisez le suffixe .cpp pour les fichiers C++
@@ -33,7 +32,7 @@ PROJECTNAME=Test
 PRJSRC= main.cpp
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
-INC=-I ../../Lib
+INC= -I ../../Lib/ 
 
 # Libraires a lier (ex: -lmylib)
 LIBS= -L ../../Lib/ -lstatique
@@ -73,10 +72,11 @@ REMOVE=rm -f
 HEXFORMAT=ihex
 
 
+
 ####### Options de compilation #######
 
 # Flags pour le compilateur en C
-CFLAGS=-I. -MMD $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
+CFLAGS=-I. -I/usr/include/simavr  -MMD $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
 	-fpack-struct -fshort-enums             \
 	-funsigned-bitfields -funsigned-char    \
 	-Wall                                        
@@ -92,7 +92,7 @@ LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
 ####### Cible (Target) #######
 
 #Nom des cibles par defaut
-TRG=$(PROJECTNAME).out
+TRG=$(PROJECTNAME).elf
 HEXROMTRG=$(PROJECTNAME).hex
 HEXTRG=$(HEXROMTRG) $(PROJECTNAME).ee.hex
 
@@ -125,16 +125,13 @@ OBJDEPS=$(CFILES:.c=.o) \
 # votre projet, vous pouvez utilisez les commandes
 # make all, make install et make clean
 .PHONY: all install clean 
-debug: CXXFLAGS += -DDEBUG 
-debug: CCFLAGS += -DDEBUG 
-debug: $(TRG)
 
 # Make all permet simplement de compiler le projet
 #
-all: $(TRG)
+all: $(TRG) $(HEXROMTRG)
 
 # Implementation de la cible
-$(TRG): $(OBJDEPS) 
+$(TRG): $(OBJDEPS)
 	$(CC) $(LDFLAGS) -o $(TRG) $(OBJDEPS) \
 	-lm $(LIBS)
 
@@ -146,8 +143,6 @@ $(TRG): $(OBJDEPS)
 %.o: %.cpp
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $<
 
-
-
 # Verification des dependances (header dependencies)
 -include *.d
 
@@ -155,7 +150,7 @@ $(TRG): $(OBJDEPS)
 # http://bit.ly/2580FU8
 
 # Production des fichiers hex a partir des fichiers elf
-%.hex: %.out
+%.hex: %.elf
 	$(OBJCOPY) -j .text -j .data \
 		-O $(HEXFORMAT) $< $@
 
@@ -169,7 +164,7 @@ install: $(HEXROMTRG)
 # Make clean permet d'effacer tout les fichiers generes
 # lors de la compilation
 clean:
-	$(REMOVE) $(TRG) $(TRG).map $(OBJDEPS) $(HEXTRG) *.d *.a *.o
+	$(REMOVE) $(TRG) $(TRG).map $(OBJDEPS) $(HEXTRG) *.d
 
 # Pour plus d'information sur les phony target, consulter:
 # http://bit.ly/1WBQe61
