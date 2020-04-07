@@ -1,0 +1,21 @@
+#include <avr/io.h> 
+#include <util/delay.h>
+#include <avr/interrupt.h>
+
+#ifndef SEG7
+#define SEG7
+
+class AfficheurSegment
+{
+private:
+    uint8_t valeursAffichees_[5];
+    const uint8_t affichages[11];
+public:
+    AfficheurSegment();
+    ~AfficheurSegment();
+    void afficherValeurs();
+    void afficherValeur(size_t position);
+    void changerValeur(size_t position, uint8_t valeur);
+};
+
+#endif
