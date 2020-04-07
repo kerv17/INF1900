@@ -14,7 +14,7 @@ private:
 public:
 	adjustmentPWM(/* args */){}
 	~adjustmentPWM();
-	void PWM (uint8_t duration);
+	void startMotor (uint8_t roueGauche, uint8_t roueDroite);
 };
 
 
