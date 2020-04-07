@@ -16,6 +16,7 @@ public:
     void afficherValeurs();
     void afficherValeur(size_t position);
     void changerValeur(size_t position, uint8_t valeur);
+    void etablirValeurs(uint8_t pourcentageGauche, uint8_t pourcentageDroite);
 };
 
 #endif

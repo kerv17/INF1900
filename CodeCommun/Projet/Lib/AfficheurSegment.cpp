@@ -1,4 +1,5 @@
 #include "AfficheurSegment.h"
+#include "tmr2.h"
 
 AfficheurSegment::AfficheurSegment():
     affichages{
@@ -14,7 +15,7 @@ AfficheurSegment::AfficheurSegment():
         0b11011110, //9
         0b10000000, //-
         },
-    valeursAffichees_({0,0,0,0,0})
+    valeursAffichees_({0,0,10,0,0})
 {
 }
 AfficheurSegment::~AfficheurSegment()
@@ -27,5 +28,16 @@ void AfficheurSegment::changerValeur(size_t position, uint8_t valeur){
 
 void AfficheurSegment::afficherValeur(size_t position){
     uint8_t valeur = affichages[valeursAffichees_[position]];
-    PORTC = valeur;    
+    PORTA = (1 << 3+getCompteurTmr2());
+    PORTC = valeur;
+    
 }
+
+void AfficheurSegment::etablirValeurs(uint8_t pourcentageGauche, uint8_t pourcentageDroite){
+    changerValeur(0,(pourcentageGauche/10));
+    changerValeur(1,(pourcentageGauche%10));
+
+    changerValeur(3,(pourcentageDroite/10));
+    changerValeur(4,(pourcentageDroite%10));
+}
+
