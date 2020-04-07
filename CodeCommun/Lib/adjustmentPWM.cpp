@@ -6,7 +6,8 @@
 #include <util/delay_basic.h>
 #include "../Lib/adjustmentPWM.h"
 
-void adjustmentPWM::PWM (uint8_t duration) 
+
+void startMotor (uint8_t roueGauche, uint8_t roueDroite)
 {
 	// mise à un des sorties OC1A et OC1B sur comparaison
 	// réussie en mode PWM 8 bits, phase correcte
@@ -15,13 +16,13 @@ void adjustmentPWM::PWM (uint8_t duration)
 
 	TCNT1 = 0;	//Timer a 0
 
-	OCR1A = duration;
+	OCR1A = roueDroite;	// PD5
 
-	OCR1B = duration;
+	OCR1B = roueGauche;	// PD4
 
 	// division d'horloge par 8 - implique une frequence de PWM fixe
 
-	TCCR1A |= (1 << COM1A1) | (1 << COM1A0) | (1 << COM1B0) | (1 << WGM10);
+	TCCR1A |= (1 << COM1A0) | (1 << COM1B0) | (1 << WGM10);
 
 	TCCR1B |= (1 << CS11); // Divise l'horloge par 8
 
