@@ -23,19 +23,19 @@ MCU=atmega324pa
 
 # Nom de votre projet
 # (utilisez un seul mot, exemple: 'monprojet')
-PROJECTNAME=test
+PROJECTNAME=ProjectFinal
 
 # Fichiers sources
 # Utilisez le suffixe .cpp pour les fichiers C++
 # Listez tous les fichiers a compiler, separes par
 # un espace. exemple: 'tp1.c tp2.cpp':
-PRJSRC= test.cpp
+PRJSRC= main.cpp 
 
 # Inclusions additionnels (ex: -I/path/to/mydir)
-INC=
+INC= -I ../Lib/ 
 
 # Libraires a lier (ex: -lmylib)
-LIBS=
+LIBS= -L ../Lib/ -lstatique
 
 # Niveau d'optimization
 # Utilisez s (size opt), 1, 2, 3 ou 0 (off)
@@ -82,7 +82,8 @@ CFLAGS=-I. -I/usr/include/simavr  -MMD $(INC) -g -mmcu=$(MCU) -O$(OPTLEVEL) \
 	-Wall                                        
 
 # Flags pour le compilateur en C++
-CXXFLAGS=-fno-exceptions     
+CXXFLAGS=-fno-exceptions
+CXXFLAGS += -DF_CPU=8000000UL     
 
 # Linker pour lier les librairies utilisees
 LDFLAGS=-Wl,-Map,$(TRG).map -mmcu=$(MCU)
