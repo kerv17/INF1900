@@ -4,10 +4,10 @@
 #include <avr/interrupt.h>
 #include <inttypes.h>
 #include <util/delay_basic.h>
-#include "../Lib/adjustmentPWM.h"
+#include "adjustmentPWM.h"
 
 
-void startMotor (uint8_t roueGauche, uint8_t roueDroite)
+void adjustmentPWM::startMotor (uint8_t roueGauche, uint8_t roueDroite) volatile
 {
 	// mise à un des sorties OC1A et OC1B sur comparaison
 	// réussie en mode PWM 8 bits, phase correcte
