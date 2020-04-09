@@ -42,7 +42,7 @@ void manoeuvre1()
         pwm.startMotor((255*i)/100, (255*90)/100);
         _delay_ms(100);
     }
-    _delay_ms(2000;)
+    _delay_ms(2000);
 
     // Affichage vitesse roue sur 7 segments
 }
@@ -65,7 +65,7 @@ void manoeuvre2()
         pwm.startMotor((255*90)/100, (255*i)/100);
         _delay_ms(100);
     }
-    _delay_ms(2000;)
+    _delay_ms(2000);
 
     // Affichage vitesse roue sur 7 segments
 }

@@ -7,26 +7,26 @@
 #include "lcm_so1602dtr_m_fw.h"
 #include "customprocs.h"
 
-#define DEMO_DDR	DDRC // `Data Direction Register' AVR occupé par l'aff.
-#define DEMO_PORT	PORTC // Port AVR occupé par l'afficheur
+#define DEMO_DDR	DDRC // `Data Direction Register' AVR occupï¿½ par l'aff.
+#define DEMO_PORT	PORTC // Port AVR occupï¿½ par l'afficheur
 
 void static inline w(void) {
 	cp_wait_ms(2000);
 }
 
-// Plus gros démos :
+// Plus gros dï¿½mos :
 static void banner(LCM&, char*, uint16_t);
 static void wave(LCM&, uint16_t, uint16_t);
 
 int main(void) {	
-	// Création de l'objet (l'afficheur est connecté sur le port DEMO_PORT)
+	// Crï¿½ation de l'objet (l'afficheur est connectï¿½ sur le port DEMO_PORT)
 	LCM disp(&DEMO_DDR, &DEMO_PORT);
 	
-	// Écriture d'un simple caractère au début de la première ligne
+	// ï¿½criture d'un simple caractï¿½re au dï¿½but de la premiï¿½re ligne
 	disp.put('p');
 	w();
 
-	// Ajout d'autres caractères
+	// Ajout d'autres caractï¿½res
 	disp.put('h').put('i').put('l').put(';');
 	w();
 	
@@ -34,23 +34,23 @@ int main(void) {
 	disp.clear();
 	w();
 	
-	// Affichage d'une chaîne sur la première ligne, à la case 2
+	// Affichage d'une chaï¿½ne sur la premiï¿½re ligne, ï¿½ la case 2
 	disp.write("premiere !", 2);
 	w();
 	
-	// Ajout d'une sous-chaîne à la suite
+	// Ajout d'une sous-chaï¿½ne ï¿½ la suite
 	disp << "woooowww !!";
 	w();
 	
-	// Suppression des 9 caractères précédents
+	// Suppression des 9 caractï¿½res prï¿½cï¿½dents
 	disp -= 9;
 	w();
 	
-	// Remplacement du contenu actuel par une nouvelle chaîne
+	// Remplacement du contenu actuel par une nouvelle chaï¿½ne
 	disp = "nouveau truc ";
 	w();
 	
-	// Ajout de trois nombres hexadécimaux avec des espaces entre chaque
+	// Ajout de trois nombres hexadï¿½cimaux avec des espaces entre chaque
 	disp << 215 << ' ' << -179 << ' ' << 6;
 	w();
 	
@@ -61,34 +61,34 @@ int main(void) {
 	disp[13] = "oh oui !";
 	w();
 	
-	// Affichage d'une chaîne, à la case 5
-	// de la deuxième ligne, en effaçant le contenu actuel
+	// Affichage d'une chaï¿½ne, ï¿½ la case 5
+	// de la deuxiï¿½me ligne, en effaï¿½ant le contenu actuel
 	disp.write("\x7e yeah! \x7f", LCM_FW_HALF_CH + 5, true);
 	w();
 	
-	// Fixage de l'index `blink'/curseur à la case 9 et activation du
+	// Fixage de l'index `blink'/curseur ï¿½ la case 9 et activation du
 	// `blink'
 	disp.set_bc_index(9);
 	disp.en_blink(true);
 	w();
 	
-	// Activation du curseur (le matériel limite son index au même que celui
+	// Activation du curseur (le matï¿½riel limite son index au mï¿½me que celui
 	// du `blink')
 	disp.en_cur(true);
 	w();
 	
-	// Désactivation du `blink'
+	// Dï¿½sactivation du `blink'
 	disp.en_blink(false);
 	w();
 	
-	// Parcours de la case 0 à la dernière case avec le curseur
+	// Parcours de la case 0 ï¿½ la derniï¿½re case avec le curseur
 	for (uint8_t i = 0; i < LCM_FW_TOT_CH; ++i) {
 		disp.set_bc_index(i);
 		cp_wait_ms(100);
 	}
 	w();
 	
-	// Parcours de la dernière case à la case 0 avec le `blink'
+	// Parcours de la derniï¿½re case ï¿½ la case 0 avec le `blink'
 	disp.en_cur(false);
 	disp.en_blink(true);
 	for (int8_t i = LCM_FW_TOT_CH; i >= 0; --i) {
@@ -97,15 +97,15 @@ int main(void) {
 	}
 	w();
 	
-	// Désactivation du `blink'
+	// Dï¿½sactivation du `blink'
 	disp.en_blink(false);
 	
-	// Démo : bannière de texte sur la première ligne
+	// Dï¿½mo : banniï¿½re de texte sur la premiï¿½re ligne
 	banner(disp, (char*) "bonjour le monde. voici une banniere de texte !",
 		100);
 	w();
 	
-	// Création d'un caractère personnalisé à l'index 3 (les 1 sont des
+	// Crï¿½ation d'un caractï¿½re personnalisï¿½ ï¿½ l'index 3 (les 1 sont des
 	// pixels actifs et les 0 inactifs)
 	uint8_t cc [] = {
 		0x04, //   #
@@ -119,13 +119,13 @@ int main(void) {
 	};
 	disp.build_cc(3, cc);
 	
-	// Affichage du dernier caractère personnalisé à la case 7 en effaçant
+	// Affichage du dernier caractï¿½re personnalisï¿½ ï¿½ la case 7 en effaï¿½ant
 	// le contenu actuel
 	disp.write("\x03", 7, true);
 	w();
 	
-	// Création d'un autre caractère personnalisé à l'index 7, mais de
-	// façon programmatique, et remplissage de la deuxième ligne
+	// Crï¿½ation d'un autre caractï¿½re personnalisï¿½ ï¿½ l'index 7, mais de
+	// faï¿½on programmatique, et remplissage de la deuxiï¿½me ligne
 	for (uint8_t i = 0; i < 8; ++i) {
 		cc[i] = _BV(i) >> (i > 4 ? 5 : 0);
 	}
@@ -135,7 +135,7 @@ int main(void) {
 	}
 	w();
 	
-	// Démo : grosse vague rapide, 10 fois
+	// Dï¿½mo : grosse vague rapide, 10 fois
 	wave(disp, 10, 10);
 	w();
 	
@@ -143,8 +143,8 @@ int main(void) {
 	wave(disp, 5, 40);
 	w();
 	
-	// Affichage de tous les caractères possibles une fois par case (noter
-	// la rapidité d'exécution)
+	// Affichage de tous les caractï¿½res possibles une fois par case (noter
+	// la rapiditï¿½ d'exï¿½cution)
 	disp.clear();
 	for (uint8_t i = 0; i < LCM_FW_TOT_CH; ++i) {
 		for (char c = 0x21; c <= 0xdf; ++c) {
@@ -155,7 +155,7 @@ int main(void) {
 	}
 	w();
 	
-	// Fin de la démonstration (avec définition d'un 'é' à l'index 4)
+	// Fin de la dï¿½monstration (avec dï¿½finition d'un 'ï¿½' ï¿½ l'index 4)
 	uint8_t cc2 [] = {
 		0x02, //    #
 		0x04, //   #
@@ -175,11 +175,11 @@ int main(void) {
 }
 
 /**
- * Fonction pour démo - bannière de texte.
+ * Fonction pour dï¿½mo - banniï¿½re de texte.
  *
- * @param lcm		Référence vers un LCM
- * @param text		Texte à afficher (jeu de caractères de l'afficheur)
- * @param ms_interval	Intervalle en millisecondes entre chaque décallage
+ * @param lcm		Rï¿½fï¿½rence vers un LCM
+ * @param text		Texte ï¿½ afficher (jeu de caractï¿½res de l'afficheur)
+ * @param ms_interval	Intervalle en millisecondes entre chaque dï¿½callage
  */
 static void banner(LCM& lcm, char* text, uint16_t ms_interval) {
 	uint8_t start = 0, stop = 1, index = 0;
@@ -214,10 +214,10 @@ static void banner(LCM& lcm, char* text, uint16_t ms_interval) {
 }
 
 /**
- * Fonction pour démo - vague.
+ * Fonction pour dï¿½mo - vague.
  *
- * @param lcm		Référence vers un LCM
- * @param rep		Nombre de répétitions
+ * @param lcm		Rï¿½fï¿½rence vers un LCM
+ * @param rep		Nombre de rï¿½pï¿½titions
  * @param ms_interval	Intervalle en millisecondes entre chaque mouvement
  */
 static void wave(LCM& lcm, uint16_t rep, uint16_t ms_interval) {
