@@ -93,7 +93,7 @@ int main()
       
       
       LCM a(&DEMO_DDR	 ,&DEMO_PORT);
-      if(lireCapteur()<40000000)
+      if(lireCapteur()<40)
         a.put('a');
       else a.put('b');
       //disp.put('a');
