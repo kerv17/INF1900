@@ -4,6 +4,12 @@
   #include <avr/interrupt.h>
   #include "../../Lib/Debug.h"
   #include "../../Lib/uart.h"
+  #include "../../Lib/sonar.cpp"
+  #include "../../Lib/lcm_so1602dtr_m_fw.h"
+  #include "../../Lib/customprocs.h"
+
+  #define DEMO_DDR	DDRB // `Data Direction Register' AVR occup� par l'aff.
+  #define DEMO_PORT	PORTB // Port AVR occup� par l'afficheur
 
 enum etat{
   initial,
@@ -83,69 +89,79 @@ int main()
      a.initialisationUART();
     for(;;)
     {
-      switch (state)
-      {
-        case initial:
-          red();
-          if (PIND & 0x04)
-          {
-            state = push1;
-            DEBUG_PRINT("push1 ");
-          }
-          _delay_ms(10);
-          break;
+      
+      
+      
+      LCM a(&DEMO_DDR	 ,&DEMO_PORT);
+      if(lireCapteur()<40000000)
+        a.put('a');
+      else a.put('b');
+      //disp.put('a');
+      
+
+      // switch (state)
+      // {
+      //   case initial:
+      //     red();
+      //     if (PIND & 0x04)
+      //     {
+      //       state = push1;
+      //       DEBUG_PRINT("push1 ");
+      //     }
+      //     _delay_ms(10);
+      //     break;
         
-        case push1:
-          amber(1);
-          if (!(PIND & 0x04))
-          {
-            state = off1;
-            DEBUG_PRINT("off1 ");
-          }
+      //   case push1:
+      //     amber(1);
+      //     if (!(PIND & 0x04))
+      //     {
+      //       state = off1;
+      //       DEBUG_PRINT("off1 ");
+      //     }
           
-          break;
+      //     break;
 
-        case off1:
-          green();
-          if (PIND & 0x04)
-          {
-            state = push2;
-             DEBUG_PRINT("push2 ");
-          }
-          _delay_ms(10);
-          break;
+      //   case off1:
+      //     green();
+      //     if (PIND & 0x04)
+      //     {
+      //       state = push2;
+      //        DEBUG_PRINT("push2 ");
+      //     }
+      //     _delay_ms(10);
+      //     break;
 
-        case push2:
-          red();
-          if (!(PIND & 0x04))
-          {
-            state = off2;
-             DEBUG_PRINT("off2 ");
-          }
-          _delay_ms(10);
-          break;
+      //   case push2:
+      //     red();
+      //     if (!(PIND & 0x04))
+      //     {
+      //       state = off2;
+      //        DEBUG_PRINT("off2 ");
+      //     }
+      //     _delay_ms(10);
+      //     break;
 
-        case off2:
-          off();
-          if (PIND & 0x04)
-          {
-            state = push3;
-             DEBUG_PRINT("push3 ");
-          }
-          _delay_ms(10);
-          break;
+      //   case off2:
+      //     off();
+      //     if (PIND & 0x04)
+      //     {
+      //       state = push3;
+      //        DEBUG_PRINT("push3 ");
+      //     }
+      //     _delay_ms(10);
+      //     break;
 
-        case push3:
-          green();
-          if (!(PIND & 0x04))
-          {
-            state = initial;
-             DEBUG_PRINT("initial ");
-          }
+      //   case push3:
+      //     green();
+      //     if (!(PIND & 0x04))
+      //     {
+      //       state = initial;
+      //        DEBUG_PRINT("initial ");
+      //     }
           
           
-          break;
-       }
+      //     break;
+      //  }
        
     }
 }
