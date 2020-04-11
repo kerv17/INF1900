@@ -1,21 +1,8 @@
 #include "AfficheurSegment.h"
-#include "tmr2.h"
+#define F_CPU 8000000UL
 
-AfficheurSegment::AfficheurSegment():
-    affichages{
-        0b01111110, //0
-        0b00001100, //1
-        0b10110110, //2
-        0b10011110, //3
-        0b11001100, //4
-        0b11011010, //5
-        0b11111010, //6
-        0b00001110, //7
-        0b11111110, //8
-        0b11011110, //9
-        0b10000000, //-
-        },
-    valeursAffichees_({0,0,10,0,0})
+
+AfficheurSegment::AfficheurSegment()
 {
 }
 AfficheurSegment::~AfficheurSegment()
@@ -27,12 +14,16 @@ void AfficheurSegment::changerValeur(uint8_t position, uint8_t valeur){
 }
 
 void AfficheurSegment::afficherValeur(uint8_t position){
+    PORTC = 0;
+    PORTA |= 0b11111000;
     uint8_t valeur = affichages[valeursAffichees_[position]];
+    PORTA = AfficheurPositions[position];
     PORTC = valeur;
+    
     
 }
 
-void AfficheurSegment::etablirValeurs(uint8_t pourcentageGauche, uint8_t pourcentageDroite){
+void AfficheurSegment::etablirPourcentages(uint8_t pourcentageGauche, uint8_t pourcentageDroite){
     changerValeur(0,(pourcentageGauche/10));
     changerValeur(1,(pourcentageGauche%10));
 
@@ -40,3 +31,10 @@ void AfficheurSegment::etablirValeurs(uint8_t pourcentageGauche, uint8_t pourcen
     changerValeur(4,(pourcentageDroite%10));
 }
 
+void AfficheurSegment::off(){
+    for (uint8_t i = 0; i < 5; i++)
+    {
+        changerValeur(i,10);
+    }
+    
+}

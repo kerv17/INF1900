@@ -6,12 +6,15 @@
 #ifndef TIMER2
 #define TIMER2
 
+class tmr2
+{
+private:
 
-void initialiserTmr2();
-void demarerTmr2();
-void arreterTmr2();
-unsigned int getCompteurTmr2();
-void resetCompteurTmr2();
-void incrementerCompteurTmr2();
+public:
+    tmr2(){}
+    ~tmr2(){}
+    void demarrerTimer();
+};
+
 
 #endif

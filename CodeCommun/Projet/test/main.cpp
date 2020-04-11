@@ -13,18 +13,50 @@
 #include "../../Lib/Debug.h"
  
 
+
+//Bloc Parametres AFficheur 7 Segments
+////////////////////////////////////////////////
+AfficheurSegment afficheur = AfficheurSegment();
+volatile uint8_t positionAfficheur = 0;
+tmr2 timer2;
+volatile uint8_t compteur2 =0;
+ISR(TIMER2_COMPA_vect){
+   cli();
+   positionAfficheur++;
+   if (positionAfficheur >= 5)
+   {
+      positionAfficheur = 0;
+   }
+   afficheur.afficherValeur(positionAfficheur);
+
+   sei();
+}
+////////////////////////////////////////////////
+
+
 int main(){
    DDRA = 0xFF;
    DDRB = 0xFF;
    DDRC = 0xFF;
    DDRD = 0xFF;
-   AfficheurSegment afficheur; 
-   demarerTmr2();
-   afficheur.etablirValeurs(15,20);
-  
-    
+   timer2.demarrerTimer();
+   
    for(;;){
+
+      //Exemple de code d'afficheur
+      afficheur.off();//Met des tirets sur tous les affichages
+      _delay_ms(3000);
+      for (uint8_t i = 0; i < 100; i++)
+      {
+         for (uint8_t j = 0; j < 100; j++)
+         {
+            afficheur.etablirPourcentages(i,j);
+            _delay_ms(10);
+         }
+      }
       
+
+
    } 
 };
     
