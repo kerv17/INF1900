@@ -14,6 +14,7 @@ private:
 public:
 	adjustmentPWM(/* args */){}
 	// ~adjustmentPWM();
+	void stopPWMSignal() volatile;
 	void startMotor (uint8_t roueGauche, uint8_t roueDroite) volatile;
 };
 
