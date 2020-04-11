@@ -29,7 +29,7 @@ volatile double distance_devant;
 volatile double distance_droite;
 
 // The variable ‘pulse’ is used to store the count value from the TCNT register.
-static volatile int pulse = 0;
+static volatile double pulse = 0;
 
 // Ecran LCD
 LCM ecranLCD(&DEMO_DDR, &DEMO_PORT);
@@ -116,7 +116,7 @@ int main()
         {
             /* On attends l'echo et donc que PINA0 passe à 0*/
         }
-        distance_gauche = pulse/58;
+        distance_gauche = pulse/58.0;
         //itoa(distance_gauche, affichageGauche, 10);
         
         
