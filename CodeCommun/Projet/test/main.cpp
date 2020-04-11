@@ -11,6 +11,7 @@
 #include "../../Lib/tmr2.h"
 #include "../../Lib/AfficheurSegment.h"
 #include "../../Lib/Debug.h"
+
  
 
 int main(){
@@ -21,7 +22,7 @@ int main(){
    AfficheurSegment afficheur; 
    demarerTmr2();
    afficheur.etablirValeurs(15,20);
-  
+   
     
    for(;;){
       

@@ -7,6 +7,7 @@
 #include "../../Lib/customprocs.h"
 #include "../../Lib/lcm_so1602dtr_m_fw.h"
 
+
 /********************************* PRINCIPE DE FONCTIONNEMENTS DU CODE POUR LES CAPTEURS SONAR ********************************
  * 
  * Les broches qui receoivent les echo (PA0, PA1, PA2) sont mises en entrées. Ces broches sont reliées (au niveau hardware)
@@ -48,6 +49,18 @@ char* messageDistance(double distance)
     {
         return " OK ";  // 2 espaces sont rajoutés pour avoir un affichage uniforme
     }
+}
+
+void conversion(double a,char* b )
+{
+uint8_t decimale =(uint8_t(a*10)%10);
+uint8_t entier = (uint8_t(a)%10);
+
+b[0]='0'+entier;
+b[1]='.';
+b[2]='0'+decimale;
+
+
 }
 
 void initialization() 
@@ -104,8 +117,13 @@ int main()
             /* On attends l'echo et donc que PINA0 passe à 0*/
         }
         distance_gauche = pulse/58;
-        itoa(distance_gauche, affichageGauche, 10);
-        ecranLCD.write(affichageGauche, 0);
+        //itoa(distance_gauche, affichageGauche, 10);
+        
+        
+        conversion(distance_gauche,affichageGauche);
+       
+        ecranLCD.write( affichageGauche, 0);
+       
         ecranLCD[16] = messageDistance(distance_gauche);
 
         // PCMSK0 |= (0 << PCINT0) | (1 << PCINT1) | (0 << PCINT2) ;
