@@ -22,7 +22,7 @@ void adjustmentPWM::startMotor (uint8_t roueGauche, uint8_t roueDroite) volatile
 	TCCR1A |= (1 << COM1A1) | (1 << COM1B1) | (1 << WGM10);
 
 	// division d'horloge par 8 - implique une frequence de PWM fixe
-	TCCR1B |= (1 << CS11); // Divise l'horloge par 8
+	TCCR1B |= (1 << CS11) ; // Divise l'horloge par 8
 
 	TCCR1C = 0;
 

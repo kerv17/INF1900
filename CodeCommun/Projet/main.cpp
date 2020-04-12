@@ -392,12 +392,14 @@ int main()
                     }
                     distance_droite = (timeCounter/10)/58.0;
                     conversion(distance_droite, affichageDroite);
-                    ecranLCD.write(affichageDroite, 11);
+                    ecranLCD.write(affichageDroite, 12);
                     ecranLCD << "m";                                    //unité de distance en metre
                     ecranLCD[28] = (messageDistance(distance_droite));  // OK ATTN DNGR en fonction de la distance
                     break;
                 }
-
+                    /************************************************************************************************************
+                    ****************************************** MODE MANOEUVRES **************************************************
+                    *************************************************************************************************************/
             case manoeuvres :
                 {
                     // On passe au mode manoeuvre alors on nettoie l'affichage

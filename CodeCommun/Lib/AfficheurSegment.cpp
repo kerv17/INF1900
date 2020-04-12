@@ -26,7 +26,7 @@ void AfficheurSegment::afficherValeur(uint8_t position) {
 void AfficheurSegment::etablirPourcentages(uint8_t pourcentageGauche, uint8_t pourcentageDroite) {
     changerValeur(0,(pourcentageGauche/10));
     changerValeur(1,(pourcentageGauche%10));
-
+    changerValeur(2,10);
     changerValeur(3,(pourcentageDroite/10));
     changerValeur(4,(pourcentageDroite%10));
 }

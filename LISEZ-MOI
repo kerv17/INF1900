@@ -1,2 +1,5 @@
-Premier fichier de votre entrepot... Vous pouvez le supprimer.
+Le projet final à compiler se trouve suivant le chemin "CodeCommun/Projet/" c'est le fichier main.cpp.
+
+Pour pouvoir compiler le projet et obtenir l'executable ProjetFinal.hex, il faut d'abord compiler la libraire qui se trouve suivant le chemin "CodeCommun/Lib/" en faisant appel à la commande "make".
+
 _____________________________________________________________
