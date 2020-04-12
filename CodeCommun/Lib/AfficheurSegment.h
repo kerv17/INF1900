@@ -22,7 +22,7 @@ class AfficheurSegment
 
 private:
     uint8_t valeursAffichees_[5] = {0,0,10,0,0};
-    const uint8_t affichages[11]= {
+    const uint8_t affichages[12]= {
         0b11111100, //0
         0b01100000, //1
         0b11011010, //2
@@ -34,6 +34,7 @@ private:
         0b11111110, //8
         0b11110110, //9
         0b00000010, //-
+        0b00000000,
         };
 public:
     AfficheurSegment();

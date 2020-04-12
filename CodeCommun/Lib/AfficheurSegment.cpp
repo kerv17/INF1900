@@ -9,11 +9,11 @@ AfficheurSegment::~AfficheurSegment()
 {
 }
 
-void AfficheurSegment::changerValeur(uint8_t position, uint8_t valeur){
+void AfficheurSegment::changerValeur(uint8_t position, uint8_t valeur) {
     valeursAffichees_[position] =valeur;
 }
 
-void AfficheurSegment::afficherValeur(uint8_t position){
+void AfficheurSegment::afficherValeur(uint8_t position) {
     PORTC = 0;
     PORTA |= 0b11111000;
     uint8_t valeur = affichages[valeursAffichees_[position]];
@@ -23,7 +23,7 @@ void AfficheurSegment::afficherValeur(uint8_t position){
     
 }
 
-void AfficheurSegment::etablirPourcentages(uint8_t pourcentageGauche, uint8_t pourcentageDroite){
+void AfficheurSegment::etablirPourcentages(uint8_t pourcentageGauche, uint8_t pourcentageDroite) {
     changerValeur(0,(pourcentageGauche/10));
     changerValeur(1,(pourcentageGauche%10));
 
@@ -31,10 +31,10 @@ void AfficheurSegment::etablirPourcentages(uint8_t pourcentageGauche, uint8_t po
     changerValeur(4,(pourcentageDroite%10));
 }
 
-void AfficheurSegment::off(){
+void AfficheurSegment::off() {
     for (uint8_t i = 0; i < 5; i++)
     {
-        changerValeur(i,10);
+        changerValeur(i,11);
     }
     
 }

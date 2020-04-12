@@ -3,12 +3,13 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include <inttypes.h>
-#include "../Lib/adjustmentPWM.h"
-#include "../Lib/tmr2.h"
-#include "../Lib/AfficheurSegment.h"
-#include "../Lib/customprocs.h"
-#include "../Lib/lcm_so1602dtr_m_fw.h"
- 
+#include <util/delay_basic.h>
+#include "../../Lib/tmr2.h"
+#include "../../Lib/AfficheurSegment.h"
+#include "../../Lib/customprocs.h"
+#include "../../Lib/lcm_so1602dtr_m_fw.h"
+#include "../../Lib/adjustmentPWM.h"
+
 #define DEMO_DDR	DDRB // `Data Direction Register' AVR occup� par l'aff.
 #define DEMO_PORT	PORTB // Port AVR occup� par l'afficheur
 
@@ -447,4 +448,3 @@ int main()
     }
     return 0;
 }
-    
